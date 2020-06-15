@@ -20,16 +20,26 @@ class MainViewModel : ViewModel() {
     private var _weatherData = MutableLiveData<WeatherInfo>()
     private var _temp = MutableLiveData<String>()
     private var _pressure = MutableLiveData<String>()
+    private var _seaLevelpressure = MutableLiveData<String>()
     private var _sunrise = MutableLiveData<String>()
     private var _sunset = MutableLiveData<String>()
+    private var _wind = MutableLiveData<String>()
+    private var _humidity = MutableLiveData<String>()
+
     val temp: LiveData<String>
         get() = _temp
     val pressure: LiveData<String>
         get() = _pressure
+    val seaLevelpressure: LiveData<String>
+        get() = _seaLevelpressure
     val sunrise: LiveData<String>
         get() = _sunrise
     val sunset: LiveData<String>
         get() = _sunset
+    val wind: LiveData<String>
+        get() = _wind
+    val humidity: LiveData<String>
+        get() = _humidity
 
     val temp_min: String = ""
     val temp_max: String = ""
@@ -40,7 +50,10 @@ class MainViewModel : ViewModel() {
         _sunset.value = null
         _sunrise.value = null
         _pressure.value = null
+        _seaLevelpressure.value = null
         _temp.value = null
+        _wind.value = null
+        _humidity.value = null
         _weatherData.value = null
     }
 
@@ -66,10 +79,15 @@ class MainViewModel : ViewModel() {
 
         val sunriseLong = weatherData.value?.city?.getSunrise()
         val sunsetLong = weatherData.value?.city?.getSunset()
+
         _sunrise.value = sunriseLong?.let { StringUtil().convertMilliToTimeFormat(it) }
         _sunset.value = sunsetLong?.let { StringUtil().convertMilliToTimeFormat(it) }
 
-        _pressure.value = weatherData.value?.list?.get(0)?.getMain()?.pressure.toString()
+        _pressure.value = weatherData.value?.list?.get(0)?.getMain()?.pressure.toString()+" hPa"
+        _seaLevelpressure.value = weatherData.value?.list?.get(0)?.getMain()?.seaLevel.toString()+" hPa"
+        _humidity.value = weatherData.value?.list?.get(0)?.getMain()?.humidity.toString()+ " %"
+
+        _wind.value = weatherData.value?.list?.get(0)?.wind?.speed.toString()
 
     }
 

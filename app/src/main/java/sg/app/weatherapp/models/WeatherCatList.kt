@@ -13,8 +13,8 @@ class WeatherCatList {
 //    var weather: List<Weather>? = null
 //    @SerializedName("clouds")
 //    var clouds: Clouds? = null
-//    @SerializedName("wind")
-//    var wind: Wind? = null
+    @SerializedName("wind")
+    var wind: Wind? = null
 //    @SerializedName("rain")
 //    var rain: Rain? = null
 //    @SerializedName("sys")
