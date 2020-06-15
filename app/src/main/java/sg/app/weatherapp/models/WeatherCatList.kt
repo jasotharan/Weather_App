@@ -2,11 +2,12 @@ package sg.app.weatherapp.models
 import com.google.gson.annotations.SerializedName
 
 class WeatherCatList {
+
     @SerializedName("dt")
-    var dt: Int? = null
+    private var dt: Int? = null
 
     @SerializedName("main")
-    var main: DetailsMain? = null
+    private var main: DetailsMain? = null
 
 //    @SerializedName("weather")
 //    var weather: List<Weather>? = null
@@ -21,4 +22,13 @@ class WeatherCatList {
 
     @SerializedName("dt_txt")
     var dtTxt: String? = null
+
+
+    fun getMain(): DetailsMain? {
+        return main
+    }
+
+    fun setMain(coord: DetailsMain?) {
+        this.main = coord
+    }
 }

@@ -14,9 +14,9 @@ class City {
     @SerializedName("timezone")
     private var timezone: Int? = null
     @SerializedName("sunrise")
-    private var sunrise: Int? = null
+    private var sunrise: Long? = null
     @SerializedName("sunset")
-    private var sunset: Int? = null
+    private var sunset: Long? = null
 
     fun getId(): Int? {
         return id
@@ -58,19 +58,19 @@ class City {
         this.timezone = timezone
     }
 
-    fun getSunrise(): Int? {
+    fun getSunrise(): Long? {
         return sunrise
     }
 
-    fun setSunrise(sunrise: Int?) {
+    fun setSunrise(sunrise: Long?) {
         this.sunrise = sunrise
     }
 
-    fun getSunset(): Int? {
+    fun getSunset(): Long? {
         return sunset
     }
 
-    fun setSunset(sunset: Int?) {
+    fun setSunset(sunset: Long?) {
         this.sunset = sunset
     }
 }

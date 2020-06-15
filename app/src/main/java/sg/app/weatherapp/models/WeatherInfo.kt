@@ -13,7 +13,7 @@ data class WeatherInfo(
     var city: City,
 
     @SerializedName("list")
-    var list: List<sg.app.weatherapp.models.WeatherCatList>? = null
+    var list: List<WeatherCatList>? = null
 
 
 )
