@@ -74,8 +74,8 @@ class MainViewModel : ViewModel() {
 
     private fun updateValues() {
         val tempFloat = weatherData.value?.list?.get(0)?.getMain()?.temp?.toFloat()
-        val celsius: Float? = tempFloat?.minus(273.15f)
-        _temp.value = String.format("%.1f", celsius) + "°C"
+
+        _temp.value = tempFloat?.let{ StringUtil().convertKelvinToCelsius(tempFloat)}  // String.format("%.1f", celsius) + "°C"
 
         val sunriseLong = weatherData.value?.city?.getSunrise()
         val sunsetLong = weatherData.value?.city?.getSunset()

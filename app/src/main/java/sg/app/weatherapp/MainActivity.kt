@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
 
 
+
         viewModel.getWeatherData("1.43","103.83")
     }
 }

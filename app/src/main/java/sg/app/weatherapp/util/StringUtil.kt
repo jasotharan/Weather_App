@@ -11,4 +11,10 @@ class StringUtil {
 
         return timeString
     }
+    fun convertKelvinToCelsius(tempFloat: Float): String {
+        val celsius: Float? = tempFloat?.minus(273.15f)
+        val celsiusString = String.format("%.1f", celsius) + "°C"
+
+        return celsiusString
+    }
 }
