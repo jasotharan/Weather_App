@@ -9,8 +9,8 @@ class WeatherCatList {
     @SerializedName("main")
     private var main: DetailsMain? = null
 
-//    @SerializedName("weather")
-//    var weather: List<Weather>? = null
+    @SerializedName("weather")
+    var weather: List<Weather>? = null
 //    @SerializedName("clouds")
 //    var clouds: Clouds? = null
     @SerializedName("wind")

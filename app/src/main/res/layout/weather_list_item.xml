@@ -10,6 +10,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     android:padding="4dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
     android:background="@drawable/background_border"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
@@ -20,8 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="12 mon"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -40,7 +41,7 @@
         app:layout_constraintRight_toRightOf="parent"
         />
     <TextView
-        android:id="@+id/temp_min_tv"
+        android:id="@+id/temp_min_n_max_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="28°/29°"
@@ -57,7 +58,7 @@
         android:text="most cloudy"
         android:textColor="@android:color/white"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/temp_min_tv"
+        app:layout_constraintTop_toBottomOf="@+id/temp_min_n_max_tv"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />

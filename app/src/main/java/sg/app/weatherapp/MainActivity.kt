@@ -1,6 +1,7 @@
 package sg.app.weatherapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
@@ -37,7 +38,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.getFiveDaysList().observe(this, Observer<List<WeatherCatList>>
         { fruitList ->
             // Access the RecyclerView Adapter and load the data into it
-            more_days_rv.adapter = WeatherAdapter(fruitList, this)
+            more_days_rv.adapter = WeatherAdapter(fruitList, this,
+                { partItem: WeatherCatList ->
+                    viewModel.updateDayTemperature(partItem)
+                })
         })
 
     }

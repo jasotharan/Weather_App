@@ -24,9 +24,12 @@ class MainViewModel : ViewModel() {
     private var _sunset = MutableLiveData<String>()
     private var _wind = MutableLiveData<String>()
     private var _humidity = MutableLiveData<String>()
+    private var _temp_min = MutableLiveData<String>()
+    private var _temp_max = MutableLiveData<String>()
+    private var _temperature_date = MutableLiveData<String>()
     private var _fiveDaysList: MutableLiveData<List<WeatherCatList>>? = null
 
-     fun getFiveDaysList(): MutableLiveData<List<WeatherCatList>> {
+    fun getFiveDaysList(): MutableLiveData<List<WeatherCatList>> {
         if (_fiveDaysList == null) {
             _fiveDaysList = MutableLiveData()
         }
@@ -47,9 +50,13 @@ class MainViewModel : ViewModel() {
         get() = _wind
     val humidity: LiveData<String>
         get() = _humidity
+    val temp_min: LiveData<String>
+        get() = _temp_min
+    val temp_max: LiveData<String>
+        get() = _temp_max
+    val temperature_date: LiveData<String>
+        get() = _temperature_date
 
-    val temp_min: String = ""
-    val temp_max: String = ""
     val weatherData: LiveData<WeatherInfo>
         get() = _weatherData
 
@@ -61,6 +68,9 @@ class MainViewModel : ViewModel() {
         _temp.value = null
         _wind.value = null
         _humidity.value = null
+        _temp_min.value = null
+        _temp_max.value = null
+        _temperature_date.value = null
         _weatherData.value = null
     }
 
@@ -75,14 +85,12 @@ class MainViewModel : ViewModel() {
             override fun onResponse(call: Call<WeatherInfo>, response: Response<WeatherInfo>) {
                 _weatherData.value = response.body()
                 updateValues()
+                _fiveDaysList?.value = weatherData.value?.list
             }
         })
     }
 
     private fun updateValues() {
-        val tempFloat = weatherData.value?.list?.get(0)?.getMain()?.temp?.toFloat()
-
-        _temp.value = tempFloat?.let{ StringUtil().convertKelvinToCelsius(tempFloat)}  // String.format("%.1f", celsius) + "°C"
 
         val sunriseLong = weatherData.value?.city?.getSunrise()
         val sunsetLong = weatherData.value?.city?.getSunset()
@@ -90,15 +98,24 @@ class MainViewModel : ViewModel() {
         _sunrise.value = sunriseLong?.let { StringUtil().convertMilliToTimeFormat(it) }
         _sunset.value = sunsetLong?.let { StringUtil().convertMilliToTimeFormat(it) }
 
-        _pressure.value = weatherData.value?.list?.get(0)?.getMain()?.pressure.toString()+" hPa"
-        _seaLevelpressure.value = weatherData.value?.list?.get(0)?.getMain()?.seaLevel.toString()+" hPa"
-        _humidity.value = weatherData.value?.list?.get(0)?.getMain()?.humidity.toString()+ " %"
-
-        _wind.value = weatherData.value?.list?.get(0)?.wind?.speed.toString()
-
-        _fiveDaysList?.value = weatherData.value?.list
-
+        updateDayTemperature(weatherData.value?.list?.get(0))
     }
 
+    fun updateDayTemperature(weather: WeatherCatList?) {
+
+        val tempFloat = weather?.getMain()?.temp?.toFloat()
+        val tempMinFloat = weather?.getMain()?.tempMin?.toFloat()
+        val tempMaxFloat = weather?.getMain()?.tempMax?.toFloat()
+
+        _temp.value = tempFloat?.let { StringUtil().convertKelvinToCelsius(tempFloat) }
+        _temp_min.value = "Min Temp : "+tempMinFloat?.let { StringUtil().convertKelvinToCelsius(tempMinFloat) }
+        _temp_max.value = "Max Temp : "+tempMaxFloat?.let { StringUtil().convertKelvinToCelsius(tempMaxFloat) }
+        _temperature_date.value = "Temperature at : "+weather?.dtTxt
+        _pressure.value = weather?.getMain()?.pressure.toString() + " hPa"
+        _seaLevelpressure.value = weather?.getMain()?.seaLevel.toString() + " hPa"
+        _humidity.value = weather?.getMain()?.humidity.toString() + " %"
+        _wind.value = weather?.wind?.speed.toString()
+
+    }
 
 }
