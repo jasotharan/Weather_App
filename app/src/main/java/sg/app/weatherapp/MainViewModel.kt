@@ -1,6 +1,8 @@
 package sg.app.weatherapp
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +15,10 @@ import sg.app.weatherapp.network.WeatherApi
 import sg.app.weatherapp.util.StringUtil
 
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val mContext = getApplication<Application>().applicationContext
+
     val appid: String = "e201f96da1403d6b12ea825bcc60233c" // own API key
 
     private var _weatherData = MutableLiveData<WeatherInfo>()
@@ -80,11 +85,18 @@ class MainViewModel : ViewModel() {
         api.enqueue(object : Callback<WeatherInfo> {
             override fun onFailure(call: Call<WeatherInfo>, t: Throwable) {
                 Log.d("TAG_TAG", "Failed :" + t.message)
+
+                _weatherData.value = SimpleSessionStore().getStoresList(mContext)
+                updateValues()
+                _fiveDaysList?.value = weatherData.value?.list
             }
 
             override fun onResponse(call: Call<WeatherInfo>, response: Response<WeatherInfo>) {
                 _weatherData.value = response.body()
+                // save list in local session
+                SimpleSessionStore().saveStoresList(mContext, response.body())
                 updateValues()
+
                 _fiveDaysList?.value = weatherData.value?.list
             }
         })
