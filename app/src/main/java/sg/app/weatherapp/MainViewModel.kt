@@ -7,11 +7,10 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import sg.app.weatherapp.models.WeatherCatList
 import sg.app.weatherapp.models.WeatherInfo
 import sg.app.weatherapp.network.WeatherApi
 import sg.app.weatherapp.util.StringUtil
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class MainViewModel : ViewModel() {
@@ -25,6 +24,14 @@ class MainViewModel : ViewModel() {
     private var _sunset = MutableLiveData<String>()
     private var _wind = MutableLiveData<String>()
     private var _humidity = MutableLiveData<String>()
+    private var _fiveDaysList: MutableLiveData<List<WeatherCatList>>? = null
+
+     fun getFiveDaysList(): MutableLiveData<List<WeatherCatList>> {
+        if (_fiveDaysList == null) {
+            _fiveDaysList = MutableLiveData()
+        }
+        return _fiveDaysList as MutableLiveData<List<WeatherCatList>>
+    }
 
     val temp: LiveData<String>
         get() = _temp
@@ -88,6 +95,8 @@ class MainViewModel : ViewModel() {
         _humidity.value = weatherData.value?.list?.get(0)?.getMain()?.humidity.toString()+ " %"
 
         _wind.value = weatherData.value?.list?.get(0)?.wind?.speed.toString()
+
+        _fiveDaysList?.value = weatherData.value?.list
 
     }
 
