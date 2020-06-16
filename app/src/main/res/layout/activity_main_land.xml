@@ -24,7 +24,7 @@
 
 
             <EditText
-                android:id="@+id/et_profileName"
+                android:id="@+id/et_city_or_country_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -44,7 +44,7 @@
                 android:text="SEARCH"
                 android:visibility="gone"
                 app:cornerRadius="8dp"
-                app:layout_constraintLeft_toRightOf="@id/et_profileName"
+                app:layout_constraintLeft_toRightOf="@id/et_city_or_country_name"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,7 +55,7 @@
                 android:layout_margin="16dp"
                 android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_profileName" />
+                app:layout_constraintTop_toBottomOf="@id/et_city_or_country_name" />
 
             <TextView
                 android:id="@+id/tv_city_name"

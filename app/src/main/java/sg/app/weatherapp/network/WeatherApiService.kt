@@ -22,8 +22,13 @@ interface WeatherApiService {
         @Query("lat") lat: String,
         @Query("lon") lon: String,
         @Query("appid") appid: String
-    ):
-            Call<WeatherInfo>
+    ):Call<WeatherInfo>
+
+    @GET("data/2.5/forecast")
+    fun getWeatherDataBycity(
+        @Query("q") city: String,
+        @Query("appid") appid: String
+    ):Call<WeatherInfo>
 }
 
 object WeatherApi {
