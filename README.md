@@ -38,6 +38,6 @@ Im using "retrofit" to forecast weather, using the OpenWeatherMap 5 day weather 
             (I have mentioned this in the code as TODO)
 
 
- ** This project can be download form above mention link  **
-    this application can be download form below mention link
+ ** This project can be download form above mention link
+    and application can be download form below mention link **
     (https://drive.google.com/file/d/1h7QpclhQg1fBiEQr632bbEE3fHwKybH8/view?usp=sharing)
