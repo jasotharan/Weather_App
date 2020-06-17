@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        // TODO get user current location and find weather by latitude and longitude
+        // TODO to get user's latitude and longitude
         viewModel.getWeatherData("1.29", "103.85")  // sg location
         progressDialog = ProgressDialog(this@MainActivity)
         progressDialog?.setMessage("Loading....")
@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    //TODO  It can be modified further specifically in future by considering both time and weather condition
     private fun setBackgroundImg(dtTxt: String?) {
         var isNight = dtTxt?.let { StringUtil().isNight(it) }!!
         if (isNight) {
