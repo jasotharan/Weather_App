@@ -8,11 +8,12 @@ Im using "retrofit" to forecast weather, using the OpenWeatherMap 5 day weather 
 (https://openweathermap.org/forecast5)
 
   In this application implemented in two way to forecast 5 days weather information
+
     1.  Using latitude and longitude coordinates (from device location ) to get 5 days of weather forecast
         eg- http://api.openweathermap.org/data/2.5/forecast?lat=35&lon=139&appid="your_api_key"
 
     2.  Using city or county name to get 5 days of weather forecast information
-        eg- http://api.openweathermap.org/data/2.5/forecast?q=jaffna,LK&appid=e201f96da1403d6b12ea825bcc60233c
+        eg- http://api.openweathermap.org/data/2.5/forecast?q=jaffna,LK&appid=your_api_key
 
     note : -
      #   Both of above mentioned methods retrieve weather forecast of 5 days at an interval of 3 hours.
